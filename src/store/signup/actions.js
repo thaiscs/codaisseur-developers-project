@@ -1,28 +1,28 @@
 import api from "../api";
 
-export function login(email, password) {
+export function signUp(name, email, password) {
   return function thunk(dispatch, getState) {
-    api("/login", {
+    api("/signup", {
       method: "POST",
       body: {
+        name: name,
         email: email,
         password: password
       }
     })
       .then(data => {
         console.log("data?", data);
-        dispatch(userLoggedIn(data.jwt));
+        dispatch(userSignedUp(data.jwt));
       })
-
       .catch(err => console.log("err", err));
   };
 }
 
-export function userLoggedIn(accessToken) {
+export function userSignedUp(accessToken) {
   return {
-    type: "USER_LOGGED_IN",
+    type: "USER_SIGNED_UP",
     payload: {
-      accessToken
+      accessToken: accessToken
     }
   };
 }

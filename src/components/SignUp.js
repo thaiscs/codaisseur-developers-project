@@ -1,32 +1,44 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { login } from "../store/login/actions";
+import { signUp } from "../store/signup/actions";
 
-class LoginPage extends React.Component {
+class SignUp extends Component {
   state = {
+    name: "",
     email: "",
     password: ""
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    console.log("handelSubmit in LoginPage - local state:", this.state);
-    const { email, password } = this.state;
-    this.props.dispatch(login(email, password));
-  };
-
   handleChange = event => {
-    console.log("getting input:");
+    console.log("getting input for SignUp:", this.state);
     this.setState({
       [event.target.name]: event.target.value
     });
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+    console.log("handelSubmit in SignUp:");
+    const { name, email, password } = this.state;
+    this.props.dispatch(signUp(name, email, password));
+    this.setState({ name: "", email: "", password: "" });
+  };
+
   render() {
     return (
       <div>
-        <h1>Login</h1>
+        <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
+          <p>
+            <input
+              type="text"
+              name="name"
+              placeholder="name"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+          </p>
+
           <p>
             <input
               type="email"
@@ -46,7 +58,7 @@ class LoginPage extends React.Component {
             />
           </p>
           <p>
-            <button type="submit">Login</button>
+            <button type="submit">Sign Up</button>
           </p>
         </form>
       </div>
@@ -54,4 +66,4 @@ class LoginPage extends React.Component {
   }
 }
 
-export default connect()(LoginPage);
+export default connect()(SignUp);

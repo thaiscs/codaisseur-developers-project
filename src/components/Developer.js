@@ -14,7 +14,7 @@ class Developer extends Component {
         ) : (
           this.props.devs.rows.map(dev => {
             return (
-              <ul key={dev.id}>
+              <ul className="developers" key={dev.id}>
                 <h4>Name: {dev.name}</h4>
                 <h5>Email: {dev.email}</h5>
               </ul>

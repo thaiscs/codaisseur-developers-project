@@ -2,9 +2,9 @@ const initialState = {
   accessToken: null
 };
 
-export default function LoginReducer(state = initialState, action = {}) {
+export default function SignedUpReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case "USER_LOGGED_IN": {
+    case "USER_SIGNED_UP": {
       return { ...state, accessToken: action.payload };
     }
     default: {
